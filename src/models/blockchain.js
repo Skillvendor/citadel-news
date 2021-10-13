@@ -30,6 +30,8 @@ export const connectToBlockchain = async () => {
 
   contract = new web3.eth.Contract(Abi, contractAddress)
   account = accounts[0]
+
+  return account
 }
 
 export const isConnectedToBlockchain = () => {

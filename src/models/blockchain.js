@@ -43,6 +43,5 @@ export const getBalance = async () => await contract.methods.balanceOf(account).
 export const isCitizen = async () => {
   const balance = await getBalance()
 
-  console.log('I AM A CITIZEN', balance)
   return balance > 0
 }

@@ -6,7 +6,7 @@ import NewsPiece from "../components/newsPiece";
 import NeoLogo from "../images/neo-tokyo-logo.png";
 import SmallNeoLogo from "../images/small-neo-tokyo-logo.png";
 
-import allIssues from "../newsIssues/index";
+//import allIssues from "../newsIssues/index";
 
 const PageContainer = styled.div`
   display: flex;

@@ -45,7 +45,7 @@ const NewsContainer = styled.div`
   `}
 `;
 
-const NewsImage = styled.img`
+const NewsImage = styled.embed`
   width: 761px;
   height: 1074px;
 `;
@@ -74,7 +74,7 @@ export default class NewsPiece extends React.Component {
         </AccordionButtonRow>
         <NewsContainer clicked={this.state.clicked}>
           {
-            this.props.images.map((image) => <NewsImage src={image.default} />)
+            this.props.images.map((image) => <NewsImage src={image} />)
           }
         </NewsContainer>
       </AccordionContainer>

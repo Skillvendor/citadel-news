@@ -96,7 +96,7 @@ export default class HomePage extends React.Component {
 }
 
 function Citizenship() {
-  const { authenticate, logout, isAuthenticated, user } = useMoralis();
+  const { authenticate, logout, isAuthenticated } = useMoralis();
 
   if (!isAuthenticated) {
     return (

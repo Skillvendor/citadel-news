@@ -1,4 +1,4 @@
-const now = new Date()
+// const now = new Date()
 
 // function importAll(r) {
 //   return r.keys().map(r);

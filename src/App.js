@@ -43,7 +43,7 @@ function Citizenship() {
 
   return (
     <div>
-      <h1>Welcome {user.get("ethAddress")}</h1>
+      <h2>Welcome {user.get("ethAddress")}</h2>
       <Roles></Roles>
       <Issues></Issues>
       <button onClick={() => logout()}>Logout</button>
@@ -65,9 +65,9 @@ function Roles() {
   }
 
   if (data.length > 0) {
-    return <pre>CITZEN</pre>;
+    return <h2>CITZEN</h2>;
   }
-  return <pre>RAT</pre>;
+  return <h2>RAT</h2>;
 }
 
 function Issues() {
@@ -83,8 +83,10 @@ function Issues() {
 
   return (
     <div>
+      <h2>News</h2>
       {data.map((value, index) => {
-        return <pre>{value.get("title")}</pre>;
+        const file = value.get("pdf");
+        return <pre><a href={file.url()}>{value.get("title")}</a></pre>;
       })}
     </div>
   );

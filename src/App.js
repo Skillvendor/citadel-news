@@ -10,40 +10,23 @@ import './App.css';
 import Calendar from './components/calendar';
 import NewsPage from './pages/newsPage';
 import { useMoralis, useMoralisQuery } from "react-moralis";
+import HomePage from "./pages/homePage";
 
 function App() {
   return (
     <Router>
       <Switch>
+        <Route path="/news">
+          <NewsPage />
+        </Route>
         <Route path="/calendar">
           <Calendar />
         </Route>
         <Route path="/">
-          <NewsPage />
+          <HomePage />
         </Route>
       </Switch>
     </Router>
-  );
-}
-
-function Citizenship() {
-  const { authenticate, logout, isAuthenticated, user } = useMoralis();
-
-  if (!isAuthenticated) {
-    return (
-      <div>
-        <button onClick={() => authenticate()}>Authenticate</button>
-      </div>
-    );
-  }
-
-  return (
-    <div>
-      <h2>Welcome {user.get("ethAddress")}</h2>
-      <Roles></Roles>
-      <Issues></Issues>
-      <button onClick={() => logout()}>Logout</button>
-    </div>
   );
 }
 

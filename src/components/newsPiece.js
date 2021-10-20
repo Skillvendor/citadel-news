@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
+import { useMoralisQuery } from "react-moralis";
+import styled from "styled-components";
 
-import styled from 'styled-components';
-
-import DownArrow from '../images/ArrowDown.png';
-import RightArrow from '../images/ArrowRight.png';
+import DownArrow from "../images/ArrowDown.png";
+import RightArrow from "../images/ArrowRight.png";
 
 const AccordionContainer = styled.div`
   display: flex;
@@ -30,7 +30,7 @@ const TextContainer = styled.div`
   line-height: 28px;
   /* identical to box height */
 
-  color: #FFFFFF;
+  color: #ffffff;
 `;
 
 const NewsContainer = styled.div`
@@ -38,9 +38,12 @@ const NewsContainer = styled.div`
   flex-direction: column;
   row-gap: 40px;
 
-  ${props => props.clicked ? `
+  ${(props) =>
+    props.clicked
+      ? `
     display: block;
-  ` : `
+  `
+      : `
     display: none;
   `}
 `;
@@ -52,11 +55,11 @@ const NewsImage = styled.embed`
 
 export default class NewsPiece extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      clicked: false
-    }
+      clicked: false,
+    };
   }
 
   invertAccordion() {
@@ -64,20 +67,45 @@ export default class NewsPiece extends React.Component {
   }
 
   render() {
-    const arrowImg = this.state.clicked ? DownArrow : RightArrow
+    const arrowImg = this.state.clicked ? DownArrow : RightArrow;
 
-    return(
+    return (
       <AccordionContainer>
         <AccordionButtonRow>
-          <ArrowContainer src={arrowImg} onClick={() => this.invertAccordion()} />
-          <TextContainer>Issue #{this.props.id} </TextContainer>
+          <ArrowContainer
+            src={arrowImg}
+            onClick={() => this.invertAccordion()}
+          />
+          <TextContainer>
+            Issue #{this.props.object.get("title")}{" "}
+          </TextContainer>
         </AccordionButtonRow>
         <NewsContainer clicked={this.state.clicked}>
-          {
-            this.props.images.map((image) => <NewsImage src={image} />)
-          }
+          <News object={this.props.object} />
         </NewsContainer>
       </AccordionContainer>
-    )
+    );
   }
-};
+}
+
+function News(props) {
+  const { data, error, isLoading } = useMoralisQuery("Images", (query) =>
+    query.equalTo("news", props.object).ascending("name")
+  );
+
+  if (error) {
+    return <pre>Access denied</pre>;
+  }
+
+  if (isLoading) {
+    return <pre>loading...</pre>;
+  }
+
+  return (
+    <div>
+      {data.map((image, index) => (
+        <NewsImage key={index} src={image.get("file").url()} />
+      ))}
+    </div>
+  );
+}

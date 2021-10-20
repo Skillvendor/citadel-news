@@ -116,10 +116,10 @@ function Citizenship() {
             VERIFY YOUR CITIZENSHIP
           </LoginButton>
         </ButtonContainer>
-
         <LinksContainer>
-        <Link href="https://discord.gg/4xnaJaqX">DISCORD →</Link>
-        <Link href="https://twitter.com/neotokyonewstv">TWITTER →</Link>
+          <Link href="https://neotokyo.codes/">CODES →</Link>
+          <Link href="https://discord.gg/4xnaJaqX">DISCORD →</Link>
+          <Link href="https://twitter.com/neotokyonewstv">TWITTER →</Link>
         </LinksContainer>
       </div>
     );
@@ -131,18 +131,10 @@ function Citizenship() {
         <LoginButton onClick={() => logout()}>LOGOUT</LoginButton>
       </ButtonContainer>
       <LinksContainer>
-        <NewsLink />
+        <Link href="https://neotokyo.codes/">CODES →</Link>
         <Link href="https://discord.gg/4xnaJaqX">DISCORD →</Link>
         <Link href="https://twitter.com/neotokyonewstv">TWITTER →</Link>
       </LinksContainer>
     </div>
   );
-}
-
-function NewsLink() {
-  const { data } = useMoralisQuery("_Role", (query) =>
-    query.equalTo("name", "Citizen")
-  );
-
-  return data.length > 0 ? <Link href="/news">CODES →</Link> : null;
 }

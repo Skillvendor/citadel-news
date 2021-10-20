@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import BackgroundImage from "../images/home-background.png";
 import NeoLogo from "../images/neo-tokyo-logo.png";
-import { useMoralis, useMoralisQuery } from "react-moralis";
+import { useMoralis } from "react-moralis";
 
 const PageContainer = styled.div`
   display: flex;

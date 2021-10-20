@@ -6,9 +6,13 @@ import { useMoralis, useMoralisQuery } from "react-moralis";
 
 const PageContainer = styled.div`
   display: flex;
+  height: 100%;
   flex-direction: column;
   justify-content: center;
   background-image: url(${BackgroundImage});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 `;
 
 const ImageContainer = styled.span`
@@ -45,7 +49,9 @@ const ButtonContainer = styled.span`
   justify-content: center;
 `;
 
-const Logo = styled.img``;
+const Logo = styled.img`
+  margin-top: 10px;
+`;
 
 const LoginButton = styled.button`
   color: white;
@@ -112,8 +118,8 @@ function Citizenship() {
         </ButtonContainer>
 
         <LinksContainer>
-          <Link href="News">DISCORD →</Link>
-          <Link href="News">TWITTER →</Link>
+        <Link href="https://discord.gg/4xnaJaqX">DISCORD →</Link>
+        <Link href="https://twitter.com/neotokyonewstv">TWITTER →</Link>
         </LinksContainer>
       </div>
     );
@@ -126,8 +132,8 @@ function Citizenship() {
       </ButtonContainer>
       <LinksContainer>
         <NewsLink />
-        <Link href="">DISCORD →</Link>
-        <Link href="">TWITTER →</Link>
+        <Link href="https://discord.gg/4xnaJaqX">DISCORD →</Link>
+        <Link href="https://twitter.com/neotokyonewstv">TWITTER →</Link>
       </LinksContainer>
     </div>
   );

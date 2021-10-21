@@ -10,6 +10,7 @@ import './App.css';
 import Calendar from './components/calendar';
 import NewsPage from './pages/newsPage';
 import HomePage from "./pages/homePage";
+import LandingPage from "./pages/landingPage";
 
 function App() {
   return (
@@ -21,8 +22,11 @@ function App() {
         <Route path="/calendar">
           <Calendar />
         </Route>
-        <Route path="/">
+        <Route path="/home">
           <HomePage />
+        </Route>
+        <Route path="/">
+          <LandingPage />
         </Route>
       </Switch>
     </Router>

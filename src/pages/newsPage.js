@@ -94,8 +94,8 @@ function Issues() {
 
   return (
     <IssuesContainer>
-      {data.map((issue) => (
-        <NewsPiece {...{id: issue.get("title"), images: [issue.get("pdf").url()]}} />
+      {data.map((issue, index) => (
+        <NewsPiece key={index} {...{object: issue}} />
       ))}
     </IssuesContainer>
   );

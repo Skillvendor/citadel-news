@@ -1,11 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
-import NewsPiece from '../components/newsPiece';
+import React from "react";
+import styled from "styled-components";
+import { useMoralisQuery } from "react-moralis";
+import NewsPiece from "../components/newsPiece";
 
-import NeoLogo from '../images/neo-tokyo-logo.png';
-import SmallNeoLogo from '../images/small-neo-tokyo-logo.png';
+import NeoLogo from "../images/neo-tokyo-logo.png";
+import SmallNeoLogo from "../images/small-neo-tokyo-logo.png";
 
-import allIssues from '../newsIssues/index';
+//import allIssues from "../newsIssues/index";
 
 const PageContainer = styled.div`
   display: flex;
@@ -54,34 +55,48 @@ const Logo = styled.img``;
 export default class NewsPage extends React.Component {
   render() {
     // eslint-disable-next-line no-restricted-globals
-    const screenWidth = screen.width
+    const screenWidth = screen.width;
 
-    return(
+    return (
       <PageContainer>
         <HeaderContainer>
-          {
-            screenWidth <= 700 && (
+          {screenWidth <= 700 && (
             <React.Fragment>
               <Logo src={SmallNeoLogo} />
               <HeaderText>NEO TOKYO NEWS</HeaderText>
             </React.Fragment>
           )}
 
-          {
-            screenWidth > 700 && (
-              <React.Fragment>
-                <HeaderText>NEO TOKYO</HeaderText>
-                <Logo src={NeoLogo} />
-                <HeaderText>NEWS</HeaderText>
-              </React.Fragment>
+          {screenWidth > 700 && (
+            <React.Fragment>
+              <HeaderText>NEO TOKYO</HeaderText>
+              <Logo src={NeoLogo} />
+              <HeaderText>NEWS</HeaderText>
+            </React.Fragment>
           )}
         </HeaderContainer>
-        <IssuesContainer>
-          {
-            allIssues.map((issue) => <NewsPiece {...issue} />)
-          }
-        </IssuesContainer>
+        <Issues />
       </PageContainer>
-    )
+    );
   }
-};
+}
+
+function Issues() {
+  const { data, error, isLoading } = useMoralisQuery("News");
+
+  if (error) {
+    return <pre>Access denied</pre>;
+  }
+
+  if (isLoading) {
+    return <pre>loading...</pre>;
+  }
+
+  return (
+    <IssuesContainer>
+      {data.map((issue, index) => (
+        <NewsPiece key={index} {...{object: issue}} />
+      ))}
+    </IssuesContainer>
+  );
+}

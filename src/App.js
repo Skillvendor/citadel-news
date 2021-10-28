@@ -9,7 +9,7 @@ import styled from "styled-components";
 
 import './App.css';
 // import Citizenship from './components/citizenship';
-import Calendar from './components/calendar';
+import Calendar from './pages/calendar';
 // import NewsPage from './pages/newsPage';
 import HomePage from "./pages/homePage";
 import DiscordRequest from './requests/discordRequest';

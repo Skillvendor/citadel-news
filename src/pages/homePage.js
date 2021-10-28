@@ -79,8 +79,9 @@ const Link = styled.a`
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
-  line-height: 19px;
+  line-height: 54px;
   text-decoration-line: underline;
+  text-align: center;
 `;
 
 export default class HomePage extends React.Component {

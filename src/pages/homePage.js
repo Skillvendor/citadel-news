@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import BackgroundImage from "../images/home-background.png";
 import NeoLogo from "../images/neo-tokyo-logo.png";
-import { useMoralis } from "react-moralis";
 
 const PageContainer = styled.div`
   display: flex;
@@ -53,7 +52,7 @@ const Logo = styled.img`
   margin-top: 10px;
 `;
 
-const LoginButton = styled.button`
+const LoginButton = styled.a`
   color: white;
   border: 1px solid white;
   background-color: transparent;
@@ -85,6 +84,40 @@ const Link = styled.a`
 `;
 
 export default class HomePage extends React.Component {
+  citizenship() {
+    // if (!this.state.isAuthenticated) {
+      return (
+        <div>
+          <ButtonContainer>
+            <LoginButton
+              href={`${process.env.REACT_APP_DISCORD_LINK}`}
+            >
+              VERIFY YOUR CITIZENSHIP
+            </LoginButton>
+          </ButtonContainer>
+          <LinksContainer>
+            <Link href="https://neotokyo.codes/">CODES →</Link>
+            <Link href="https://discord.gg/4xnaJaqX">DISCORD →</Link>
+            <Link href="https://twitter.com/neotokyonewstv">TWITTER →</Link>
+          </LinksContainer>
+        </div>
+      );
+    // }
+
+    // return (
+    //   <div>
+    //     <ButtonContainer>
+    //       <LoginButton onClick={() => this.logout()}>LOGOUT</LoginButton>
+    //     </ButtonContainer>
+    //     <LinksContainer>
+    //       <Link href="https://neotokyo.codes/">CODES →</Link>
+    //       <Link href="https://discord.gg/4xnaJaqX">DISCORD →</Link>
+    //       <Link href="https://twitter.com/neotokyonewstv">TWITTER →</Link>
+    //     </LinksContainer>
+    //   </div>
+    // );
+  }
+
   render() {
     return (
       <PageContainer>
@@ -95,46 +128,8 @@ export default class HomePage extends React.Component {
         <Subtitle>
           Data streams connecting our minds, tying Neo Tokyo together
         </Subtitle>
-        <Citizenship />
+        {this.citizenship()}
       </PageContainer>
     );
   }
-}
-
-function Citizenship() {
-  const { authenticate, logout, isAuthenticated } = useMoralis();
-
-  if (!isAuthenticated) {
-    return (
-      <div>
-        <ButtonContainer>
-          <LoginButton
-            onClick={() =>
-              authenticate({ signingMessage: "VERIFY YOUR CITIZENSHIP" })
-            }
-          >
-            VERIFY YOUR CITIZENSHIP
-          </LoginButton>
-        </ButtonContainer>
-        <LinksContainer>
-          <Link href="https://neotokyo.codes/">CODES →</Link>
-          <Link href="https://discord.gg/4xnaJaqX">DISCORD →</Link>
-          <Link href="https://twitter.com/neotokyonewstv">TWITTER →</Link>
-        </LinksContainer>
-      </div>
-    );
-  }
-
-  return (
-    <div>
-      <ButtonContainer>
-        <LoginButton onClick={() => logout()}>LOGOUT</LoginButton>
-      </ButtonContainer>
-      <LinksContainer>
-        <Link href="https://neotokyo.codes/">CODES →</Link>
-        <Link href="https://discord.gg/4xnaJaqX">DISCORD →</Link>
-        <Link href="https://twitter.com/neotokyonewstv">TWITTER →</Link>
-      </LinksContainer>
-    </div>
-  );
 }

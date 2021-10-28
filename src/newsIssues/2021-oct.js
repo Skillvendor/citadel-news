@@ -16,7 +16,7 @@ const octEvents = [
   {
     id: 1,
     date: new Date(2021, 8, 12),
-    images: [issuesOct2021['oct-2021/issue12Oct.png'], issuesOct2021['oct-2021/issue12Oct2.png']]
+    images: [issuesOct2021['oct-2021/issue12Oct.png'], issuesOct2021['oct-2021/issue12Oct2.png'], issuesOct2021['oct-2021/issue12Oct2.png']]
   },
   {
     id: 2,

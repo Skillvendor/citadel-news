@@ -1,9 +1,10 @@
 import React from "react";
-import { useMoralisQuery } from "react-moralis";
+// import { useMoralisQuery } from "react-moralis";
 import styled from "styled-components";
 
 import DownArrow from "../images/ArrowDown.png";
 import RightArrow from "../images/ArrowRight.png";
+import NewsCarousel from "./newsCarousel";
 
 const AccordionContainer = styled.div`
   display: flex;
@@ -48,9 +49,11 @@ const NewsContainer = styled.div`
   `}
 `;
 
-const NewsImage = styled.embed`
-  width: 761px;
-  height: 1074px;
+const NewsImage = styled.img`
+  border-style: groove;
+  margin: 8px;
+  width: 361px;
+  height: 510px;
 `;
 
 export default class NewsPiece extends React.Component {
@@ -59,11 +62,21 @@ export default class NewsPiece extends React.Component {
 
     this.state = {
       clicked: false,
+      isModalOpen: false,
+      newsIndexSelected: 0,
     };
   }
 
   invertAccordion() {
     this.setState({ clicked: !this.state.clicked });
+  }
+
+  openModal(index) {
+    this.setState({ isModalOpen: true, newsIndexSelected: index });
+  }
+
+  closeModal() {
+    this.setState({ isModalOpen: false });
   }
 
   render() {
@@ -76,36 +89,46 @@ export default class NewsPiece extends React.Component {
             src={arrowImg}
             onClick={() => this.invertAccordion()}
           />
-          <TextContainer>
+          <TextContainer>Issue #{this.props.id} </TextContainer>
+          {/* <TextContainer>
             Issue #{this.props.object.get("title")}{" "}
-          </TextContainer>
+          </TextContainer> */}
         </AccordionButtonRow>
         <NewsContainer clicked={this.state.clicked}>
-          <News object={this.props.object} />
+          {
+            this.props.images.map((image, index) => <NewsImage src={image.default} onClick={() => this.openModal(index)}/>)
+          }
+          <NewsCarousel
+            isOpen={this.state.isModalOpen}
+            closeModal={() => this.closeModal()}
+            selectedNewsPiece={this.state.newsIndexSelected}
+            newsPieces={this.props.images}
+          />
+          {/* <News object={this.props.object} /> */}
         </NewsContainer>
       </AccordionContainer>
     );
   }
 }
 
-function News(props) {
-  const { data, error, isLoading } = useMoralisQuery("Images", (query) =>
-    query.equalTo("news", props.object).ascending("name")
-  );
+// function News(props) {
+//   const { data, error, isLoading } = useMoralisQuery("Images", (query) =>
+//     query.equalTo("news", props.object).ascending("name")
+//   );
 
-  if (error) {
-    return <pre>Access denied</pre>;
-  }
+//   if (error) {
+//     return <pre>Access denied</pre>;
+//   }
 
-  if (isLoading) {
-    return <pre>loading...</pre>;
-  }
+//   if (isLoading) {
+//     return <pre>loading...</pre>;
+//   }
 
-  return (
-    <div>
-      {data.map((image, index) => (
-        <NewsImage key={index} src={image.get("file").url()} />
-      ))}
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       {data.map((image, index) => (
+//         <NewsImage key={index} src={image.get("file").url()} />
+//       ))}
+//     </div>
+//   );
+// }

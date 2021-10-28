@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { useMoralisQuery } from "react-moralis";
+// import { useMoralisQuery } from "react-moralis";
 import NewsPiece from "../components/newsPiece";
 
 import NeoLogo from "../images/neo-tokyo-logo.png";
 import SmallNeoLogo from "../images/small-neo-tokyo-logo.png";
 
-//import allIssues from "../newsIssues/index";
+import allIssues from "../newsIssues/index";
 
 const PageContainer = styled.div`
   display: flex;
@@ -48,6 +48,7 @@ const IssuesContainer = styled.div`
   flex-direction: column;
 
   row-gap: 20px;
+  width: 70%;
 `;
 
 const Logo = styled.img``;
@@ -82,20 +83,21 @@ export default class NewsPage extends React.Component {
 }
 
 function Issues() {
-  const { data, error, isLoading } = useMoralisQuery("News");
+  // const { data, error, isLoading } = useMoralisQuery("News");
 
-  if (error) {
-    return <pre>Access denied</pre>;
-  }
+  // if (error) {
+  //   return <pre>Access denied</pre>;
+  // }
 
-  if (isLoading) {
-    return <pre>loading...</pre>;
-  }
+  // if (isLoading) {
+  //   return <pre>loading...</pre>;
+  // }
 
   return (
     <IssuesContainer>
-      {data.map((issue, index) => (
-        <NewsPiece key={index} {...{object: issue}} />
+      {allIssues.map((issue, index) => (
+        // <NewsPiece key={index} {...{object: issue}} />
+        <NewsPiece key={index} {...issue} />
       ))}
     </IssuesContainer>
   );

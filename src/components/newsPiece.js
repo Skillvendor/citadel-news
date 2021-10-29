@@ -1,5 +1,4 @@
 import React from "react";
-// import { useMoralisQuery } from "react-moralis";
 import styled from "styled-components";
 
 import DownArrow from "../images/ArrowDown.png";
@@ -110,25 +109,3 @@ export default class NewsPiece extends React.Component {
     );
   }
 }
-
-// function News(props) {
-//   const { data, error, isLoading } = useMoralisQuery("Images", (query) =>
-//     query.equalTo("news", props.object).ascending("name")
-//   );
-
-//   if (error) {
-//     return <pre>Access denied</pre>;
-//   }
-
-//   if (isLoading) {
-//     return <pre>loading...</pre>;
-//   }
-
-//   return (
-//     <div>
-//       {data.map((image, index) => (
-//         <NewsImage key={index} src={image.get("file").url()} />
-//       ))}
-//     </div>
-//   );
-// }

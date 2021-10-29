@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-// import { useMoralisQuery } from "react-moralis";
 import NewsPiece from "../components/newsPiece";
 
 import NeoLogo from "../images/neo-tokyo-logo.png";

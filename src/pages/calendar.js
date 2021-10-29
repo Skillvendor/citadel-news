@@ -37,7 +37,6 @@ export default class NTCalendar extends React.Component {
   render() {
     const localizer = momentLocalizer(moment)
     let allViews = [Views.MONTH, Views.AGENDA, Views.DAY]
-    console.log('These are the views', Views);
 
     return(
       <Calendar

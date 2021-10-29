@@ -8,7 +8,6 @@ import styled from "styled-components";
 // } from "react-router-dom";
 
 import './App.css';
-// import Citizenship from './components/citizenship';
 import Calendar from './pages/calendar';
 // import NewsPage from './pages/newsPage';
 import HomePage from "./pages/homePage";
@@ -52,7 +51,7 @@ class App extends React.Component {
 
     const userId = userIdentity?.data?.id;
 
-    const memberRequest = new StandardRequest('http://45.32.221.76:42069')
+    const memberRequest = new StandardRequest(process.env.REACT_APP_CITIZENS_SERVER)
     const { data: { members: discordMembers } } = await memberRequest.get('citizens.json')
 
     if(discordMembers.includes(userId)) {

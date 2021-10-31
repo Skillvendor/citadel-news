@@ -1,18 +1,20 @@
 import React from 'react';
 import styled from "styled-components";
-// import {
-//   BrowserRouter as Router,
-//   Switch,
-//   Route,
-//   // Link
-// } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  // Link
+} from "react-router-dom";
 
 import './App.css';
 import Calendar from './pages/calendar';
 // import NewsPage from './pages/newsPage';
 import HomePage from "./pages/homePage";
+import CalendarAdmin from './pages/calendarAdmin';
 import DiscordRequest from './requests/discordRequest';
 import StandardRequest from './requests/standardRequest';
+
 // import LandingPage from "./pages/landingPage";
 import { getToken, setToken, deleteToken } from './lib/auth';
 import { getDiscordCode } from './lib/url';
@@ -89,41 +91,35 @@ class App extends React.Component {
     this.setState({ loading: false })
   }
 
-
-  // render() {
-  //   return (
-  //     <Router>
-  //       <Switch>
-  //         <Route path="/news">
-  //           <NewsPage />
-  //         </Route>
-  //         <Route path="/calendar">
-  //           <Calendar />
-  //         </Route>
-  //         <Route path="/home">
-  //           <HomePage />
-  //         </Route>
-  //         <Route path="/">
-  //           <HomePage />
-  //         </Route>
-  //       </Switch>
-  //     </Router>
-  //   );
-  // }
-
   render() {
+
+    console.log('RENDERING', this.state)
     return (
-      this.state.loading ? (
-        <CenteredLoader >
-          <CircularProgress />
-        </CenteredLoader>
-      ) :
-        this.state.isCitizen ? (
-          <Calendar />
-        ) : (
-          <HomePage />
-        )
+      <React.Fragment>
+        <Router>
+          <Switch>
+            <Route path="/calendarAdmin">
+              <CalendarAdmin />
+            </Route>
+            <Route path="/">
+            {
+              this.state.loading ? (
+                <CenteredLoader >
+                  <CircularProgress />
+                </CenteredLoader>
+              ) :
+                this.state.isCitizen ? (
+                  <Calendar />
+                ) : (
+                  <HomePage />
+                )
+            }
+            </Route>
+          </Switch>
+        </Router>
+      </React.Fragment>
     )
+
   }
 }
 

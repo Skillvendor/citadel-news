@@ -9,6 +9,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { getCalendarEvents } from '../lib/firebase/calendarEvent';
 import Header from '../components/header';
 import PageContainer from '../components/pageContainer';
+import BasicModal from '../components/basicModal';
 
 const TitleContainer = styled.div`
   font-family: Orbitron;
@@ -31,7 +32,9 @@ export default class NTCalendar extends React.Component {
     super(props)
 
     this.state = {
-      events: []
+      events: [],
+      selectedEvent: {},
+      openModal: false
     }
   }
 
@@ -39,6 +42,14 @@ export default class NTCalendar extends React.Component {
     const events = await getCalendarEvents();
     console.log('GOT EVENTS', events)
     this.setState({ events })
+  }
+
+  handleCloseModal = () => {
+    this.setState({ openModal: false })
+  }
+
+  handleOpenModal = (event) => {
+    this.setState({ openModal: true, selectedEvent: event})
   }
 
   getEventColor = ({ eventType }) => {
@@ -86,8 +97,14 @@ export default class NTCalendar extends React.Component {
             style={{ height: screen.height }}
             showMultiDayTimes
             eventPropGetter={this.eventPropGetter}
+            onSelectEvent={event => this.handleOpenModal(event)}
           />
         </CalendarContainer>
+        <BasicModal
+          open={this.state.openModal}
+          handleClose={() => this.handleCloseModal()}
+          event={this.state.selectedEvent}
+        />
       </PageContainer>
     )
   }

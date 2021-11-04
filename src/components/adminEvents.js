@@ -2,7 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 import DatePicker from "./datepicker";
+import DropdownPicker from './dropdownPicker';
 import { addCalendarEvent } from "../lib/firebase/calendarEvent";
+import { eventTypes } from "../lib/constants";
+
 
 const Container = styled.div`
   margin: 20px;
@@ -28,6 +31,7 @@ const PickerContainer = styled.div`
   background-color: white;
   margin: 10px;
   width: fit-content;
+  padding: 10px;
 `;
 
 const Button = styled.button`
@@ -42,6 +46,13 @@ const Event = styled.label`
   color: orange;
 `;
 
+const DropDownContainer = styled.div`
+  background-color: #FFFFFF;
+  margin: 10px;
+  padding: 10px;
+  width: fit-content;
+`;
+
 export default class AdminEvents extends React.Component {
   constructor(props) {
     super(props);
@@ -51,8 +62,10 @@ export default class AdminEvents extends React.Component {
       shortDescription: "",
       description: "",
       start: new Date(),
-      end: (new Date()).setHours((new Date()).getHours() + 2),
+      end: new Date((new Date()).setHours((new Date()).getHours() + 2)),
+      eventType: "",
       event: "",
+      loading: false
     };
   }
 
@@ -65,9 +78,12 @@ export default class AdminEvents extends React.Component {
   }
 
   async saveEvent() {
-    this.setState({event: "Creating event..."});
+    if(this.state.loading) {
+      return
+    }
+    this.setState({event: "Creating event...", loading: true});
     await addCalendarEvent({ ...this.state });
-    this.setState({event: "Event created!", title: "", shortDescription: "", description: "", start: new Date(), end: (new Date()).setHours((new Date()).getHours() + 2)});
+    this.setState({event: "Event created!", loading: false, title: "", shortDescription: "", description: "", eventType: "", start: new Date(), end: new Date((new Date()).setHours((new Date()).getHours() + 2))});
   }
 
   render() {
@@ -111,7 +127,15 @@ export default class AdminEvents extends React.Component {
             handleChange={(value) => this.handleDateChange(value, "end")}
           />
         </PickerContainer>
-        <Button onClick={() => this.saveEvent()}>Create Event</Button>
+        <DropDownContainer>
+          <DropdownPicker
+            name="Event Type"
+            value={this.state.eventType}
+            handleChange={(event) => this.setState({ eventType: event.target.value })}
+            items={eventTypes}
+          />
+        </DropDownContainer>
+        <Button disabled={this.state.loading} onClick={() => this.saveEvent()}>Create Event</Button>
         <Event>{this.state.event}</Event>
       </Container>
     );

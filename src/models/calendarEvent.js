@@ -3,6 +3,7 @@ export default class CalendarEvent {
     this.title = firebaseObject.title
     this.shortDescription = firebaseObject.shortDescription
     this.description = firebaseObject.description
+    this.eventType = firebaseObject.eventType
     this.start = this.toDateTime(firebaseObject.start.seconds)
     this.end = this.toDateTime(firebaseObject.end.seconds)
   }

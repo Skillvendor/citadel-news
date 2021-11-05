@@ -1,11 +1,16 @@
 import db from './firebase';
-import { collection, addDoc, getDocs } from 'firebase/firestore';
+import { doc, collection, addDoc, getDocs, updateDoc, deleteDoc } from 'firebase/firestore';
 import CalendarEvent from '../../models/calendarEvent';
 
-export const addCalendarEvent = async (data) => {
-  console.log('THIS IS THE DATA', data)
+const isValid = (data) => {
   if(!data.start || !data.end || !data.title || !data.eventType) {
-    console.log('events must have a date and title and eventType')
+    return false
+  }
+
+  return true;
+}
+export const addCalendarEvent = async (data) => {
+  if(!isValid(data)) {
     return
   }
 
@@ -29,8 +34,35 @@ export const getCalendarEvents = async () => {
 
   const events = []
   querySnapshot.forEach((doc) => {
-    events.push(new CalendarEvent(doc.data()))
+    events.push(new CalendarEvent({ id: doc.id, ...doc.data() }))
   });
 
   return events
+}
+
+export const updateCalendarEvent = async (data) => {
+  try {
+    await updateDoc(doc(db, "calendarEvents", data.id), {
+      title: data.title,
+      shortDescription: data.shortDescription,
+      description: data.description,
+      eventType: data.eventType,
+      start: data.start,
+      end: data.end
+    });
+    console.log("Event updated");
+  } catch (e) {
+    console.error("Error updating event in calendar: ", e);
+  }
+  // db.collection("users").doc(doc.id).update({foo: "bar"});
+}
+
+export const deleteCalendarEvent = async (id) => {
+  // const response = await deleteDoc
+  try {
+    await deleteDoc(doc(db, "calendarEvents", id));
+    console.log("Event deleted");
+  } catch (e) {
+    console.error("Error deleting event in calendar: ", e);
+  }
 }

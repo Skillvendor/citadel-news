@@ -1,5 +1,7 @@
 export default class CalendarEvent {
   constructor(firebaseObject) {
+    console.log('THIS IS THE FIREBASE OBJ', firebaseObject)
+    this.id = firebaseObject.id
     this.title = firebaseObject.title
     this.shortDescription = firebaseObject.shortDescription
     this.description = firebaseObject.description

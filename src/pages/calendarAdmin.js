@@ -3,6 +3,7 @@ import AdminLogin from '../components/adminLogin';
 
 import AdminAuth from '../lib/firebase/adminAuth';
 import AdminEvents from '../components/adminEvents';
+import AdminTable from '../components/adminTable';
 
 export default class NTCalendarAdmin extends React.Component {
   constructor(props) {
@@ -22,8 +23,11 @@ export default class NTCalendarAdmin extends React.Component {
 
   render() {
     return(
-      this.state.isAdmin ? (
-        <AdminEvents />
+      true ? (
+        <React.Fragment>
+          <AdminEvents />
+          <AdminTable />
+        </React.Fragment>
       ) : (
         <AdminLogin handleAuth={this.handleAuth} />
       )

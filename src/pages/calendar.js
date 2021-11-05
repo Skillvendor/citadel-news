@@ -40,7 +40,6 @@ export default class NTCalendar extends React.Component {
 
   async componentDidMount() {
     const events = await getCalendarEvents();
-    console.log('GOT EVENTS', events)
     this.setState({ events })
   }
 
@@ -104,6 +103,7 @@ export default class NTCalendar extends React.Component {
           open={this.state.openModal}
           handleClose={() => this.handleCloseModal()}
           event={this.state.selectedEvent}
+          borderColor={this.getEventColor(this.state.selectedEvent)}
         />
       </PageContainer>
     )

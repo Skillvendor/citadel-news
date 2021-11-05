@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import DatePicker from "./datepicker";
 import DropdownPicker from './dropdownPicker';
-import { addCalendarEvent } from "../lib/firebase/calendarEvent";
+import { addCalendarEvent, updateCalendarEvent, deleteCalendarEvent } from "../lib/firebase/calendarEvent";
 import { eventTypes } from "../lib/constants";
 
 
@@ -57,13 +57,18 @@ export default class AdminEvents extends React.Component {
   constructor(props) {
     super(props);
 
+    const {
+      event
+    } = props
+
     this.state = {
-      title: "",
-      shortDescription: "",
-      description: "",
-      start: new Date(),
-      end: new Date((new Date()).setHours((new Date()).getHours() + 2)),
-      eventType: "",
+      id: event?.id || "",
+      title: event?.title || "",
+      shortDescription: event?.shortDescription || "",
+      description: event?.description || "",
+      start: event?.start || new Date(),
+      end: event?.end || new Date((new Date()).setHours((new Date()).getHours() + 2)),
+      eventType: event?.eventType || "",
       event: "",
       loading: false
     };
@@ -84,6 +89,24 @@ export default class AdminEvents extends React.Component {
     this.setState({event: "Creating event...", loading: true});
     await addCalendarEvent({ ...this.state });
     this.setState({event: "Event created!", loading: false, title: "", shortDescription: "", description: "", eventType: "", start: new Date(), end: new Date((new Date()).setHours((new Date()).getHours() + 2))});
+  }
+
+  async updateEvent() {
+    if(this.state.loading) {
+      return
+    }
+    this.setState({event: "Updating event...", loading: true});
+    await updateCalendarEvent({ ...this.state });
+    this.setState({event: "Event updated!", loading: false });
+  }
+
+  async deleteEvent() {
+    if(this.state.loading) {
+      return
+    }
+    this.setState({event: "Deleting event...", loading: true});
+    await deleteCalendarEvent( this.state.id );
+    this.setState({event: "Event deleted!", loading: false });
   }
 
   render() {
@@ -135,7 +158,18 @@ export default class AdminEvents extends React.Component {
             items={eventTypes}
           />
         </DropDownContainer>
-        <Button disabled={this.state.loading} onClick={() => this.saveEvent()}>Create Event</Button>
+        { this.props.event?.id ?
+          (
+            <React.Fragment>
+              <Button disabled={this.state.loading} onClick={() => this.updateEvent()}>Update Event</Button>
+              <Button disabled={this.state.loading} onClick={() => this.deleteEvent()}>Delete Event</Button>
+            </React.Fragment>
+          ) :
+          (
+            <Button disabled={this.state.loading} onClick={() => this.saveEvent()}>Create Event</Button>
+          )
+        }
+
         <Event>{this.state.event}</Event>
       </Container>
     );

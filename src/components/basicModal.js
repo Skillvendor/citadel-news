@@ -2,20 +2,45 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import styled from "styled-components";
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+const TitleContainer = styled.div`
+  font-family: Orbitron;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 30px;
+  text-align: center;
+  letter-spacing: 0.06em;
+
+  color: #FFFFFF;
+`;
+
+const EventDescriptionContainer = styled.div`
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 30px;
+  text-align: center;
+  letter-spacing: 0.06em;
+
+  color: #FFFFFF;
+`;
 
 export default function BasicModal(props) {
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'black',
+    border: `4px solid ${props.borderColor}`,
+    boxShadow: 24,
+    p: 4,
+  };
+
   return (
     <div>
       <Modal
@@ -26,10 +51,14 @@ export default function BasicModal(props) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            {props.event.title}
+            <TitleContainer>
+              {props.event.title}
+            </TitleContainer>
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {props.event.description}
+            <EventDescriptionContainer>
+              {props.event.description}
+            </EventDescriptionContainer>
           </Typography>
         </Box>
       </Modal>

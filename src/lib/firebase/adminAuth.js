@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 // app needs to be imported otherwise admin won't work
-// eslint-disable-next-line no-unused-vars
+
 import { app } from './firebase';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 

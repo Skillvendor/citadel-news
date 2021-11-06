@@ -23,7 +23,7 @@ export default class NTCalendarAdmin extends React.Component {
 
   render() {
     return(
-      true ? (
+      this.state.isAdmin ? (
         <React.Fragment>
           <AdminEvents />
           <AdminTable />

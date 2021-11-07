@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
+import './calendarToolbar.css';
 
 import moment from 'moment'
 
@@ -24,8 +25,19 @@ const TitleContainer = styled.div`
 `;
 
 const CalendarContainer = styled.div`
-  background: #FFFFFF;
+  background: #000000;
+  color: #FFFFFF;
+
+  font-family: Orbitron !important;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: right;
+  letter-spacing: 0.06em;
 `;
+
+const currentMonth = (new Date()).getMonth();
 
 export default class NTCalendar extends React.Component {
   constructor(props) {
@@ -68,11 +80,39 @@ export default class NTCalendar extends React.Component {
     return bgColor;
   }
 
+  getDayColor = (month) => {
+    if(month !== currentMonth) {
+      return '#263130'
+    }
+
+    return '#000000'
+  }
+
   eventPropGetter = (props) => {
     return {
       style: {
-        color: 'black',
+        color: '#000000',
         background: this.getEventColor(props)
+      }
+    }
+  }
+
+  slotPropGetter = () => {
+    return {
+      style: {
+        color: '#FFFFFF',
+        background: '#000000'
+      }
+    }
+  }
+
+  dayPropGetter = (props) => {
+    return {
+      style: {
+        color: '#FFFFFF',
+        background: this.getDayColor(
+          (new Date(props)).getMonth()
+        )
       }
     }
   }
@@ -96,6 +136,8 @@ export default class NTCalendar extends React.Component {
             style={{ height: screen.height }}
             showMultiDayTimes
             eventPropGetter={this.eventPropGetter}
+            slotPropGetter={this.slotPropGetter}
+            dayPropGetter={this.dayPropGetter}
             onSelectEvent={event => this.handleOpenModal(event)}
           />
         </CalendarContainer>

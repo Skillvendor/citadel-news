@@ -1,0 +1,20 @@
+span.rbc-btn-group > button {
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+  box-sizing: border-box;
+  background: #000000;
+
+  font-family: Orbitron;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 18px;
+  /* identical to box height */
+
+  letter-spacing: 0.06em;
+}
+
+button.rbc-active {
+  color: #000000 !important;
+  background: #FFFFFF !important;
+}

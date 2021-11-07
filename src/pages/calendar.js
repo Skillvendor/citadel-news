@@ -37,7 +37,9 @@ const CalendarContainer = styled.div`
   letter-spacing: 0.06em;
 `;
 
-const currentMonth = (new Date()).getMonth();
+const currentDate = new Date()
+const currentMonth = currentDate.getMonth();
+const currentDay = currentDate.getDate();
 
 export default class NTCalendar extends React.Component {
   constructor(props) {
@@ -80,12 +82,15 @@ export default class NTCalendar extends React.Component {
     return bgColor;
   }
 
-  getDayColor = (month) => {
-    if(month !== currentMonth) {
-      return '#263130'
+  getDayColor = (day, month) => {
+    if(month === currentMonth) {
+      if(day === currentDay) {
+        return '#074ca8'
+      }
+      return '#000000'
     }
 
-    return '#000000'
+    return '#263130'
   }
 
   eventPropGetter = (props) => {
@@ -107,11 +112,13 @@ export default class NTCalendar extends React.Component {
   }
 
   dayPropGetter = (props) => {
+    const date = new Date(props)
     return {
       style: {
         color: '#FFFFFF',
         background: this.getDayColor(
-          (new Date(props)).getMonth()
+          date.getDate(),
+          date.getMonth()
         )
       }
     }

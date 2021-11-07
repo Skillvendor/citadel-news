@@ -12,6 +12,8 @@ import Header from '../components/header';
 import PageContainer from '../components/pageContainer';
 import BasicModal from '../components/basicModal';
 
+import { eventTypes } from '../lib/constants';
+
 const TitleContainer = styled.div`
   font-family: Orbitron;
   font-style: normal;
@@ -69,11 +71,20 @@ export default class NTCalendar extends React.Component {
     let bgColor;
 
     switch (eventType) {
-      case 'urgent':
-        bgColor = 'red'
+      case eventTypes['Incubator Discussions']:
+        bgColor = '#92334E'
         break;
-      case 'warning':
-        bgColor = 'yellow'
+      case eventTypes['AMAs']:
+        bgColor = '#4E4ECB'
+        break;
+      case eventTypes['Project Outreach']:
+        bgColor = '#2ED3E7'
+        break;
+      case eventTypes['Project Support']:
+        bgColor = '#EEF547'
+        break;
+      case eventTypes['Official NeoTokyo Event']:
+        bgColor = '#FF3D2B'
         break;
       default:
         bgColor = '#79b473'

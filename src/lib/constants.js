@@ -1,5 +1,7 @@
 export const eventTypes = {
-  talgoa: 'talgoa',
-  skillvendor: 'skillvendor',
-  mcgee: 'mcgee'
+  'Incubator Discussions': 'Incubator Discussions',
+  'AMAs': 'AMAs',
+  'Project Outreach': 'Project Outreach',
+  'Project Support': 'Project Support',
+  'Official NeoTokyo Event': 'Official NeoTokyo Event'
 }

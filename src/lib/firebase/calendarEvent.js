@@ -18,7 +18,6 @@ export const addCalendarEvent = async (data) => {
   try {
     const docRef = await addDoc(collection(db, "calendarEvents"), {
       title: data.title,
-      shortDescription: data.shortDescription,
       description: data.description,
       eventType: data.eventType,
       start: data.start.toString(),
@@ -45,7 +44,6 @@ export const updateCalendarEvent = async (data) => {
   try {
     await updateDoc(doc(db, "calendarEvents", data.id), {
       title: data.title,
-      shortDescription: data.shortDescription,
       description: data.description,
       eventType: data.eventType,
       start: data.start.toString(),

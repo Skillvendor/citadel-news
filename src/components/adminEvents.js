@@ -6,6 +6,7 @@ import DropdownPicker from './dropdownPicker';
 import { addCalendarEvent, updateCalendarEvent, deleteCalendarEvent } from "../lib/firebase/calendarEvent";
 import { eventTypes } from "../lib/constants";
 
+import { Editor } from './editor';
 
 const Container = styled.div`
   margin: 20px;
@@ -22,17 +23,19 @@ const Input = styled.input`
   width: 100%;
 `;
 
-const Textarea = styled.textarea`
-  width: 100%;
-  height: 200px;
-`;
-
 const PickerContainer = styled.div`
   background-color: white;
   margin: 10px;
   width: fit-content;
   padding: 10px;
 `;
+
+const EditorContainer = styled.div`
+  background: #FFFFFF;
+  color: #000000;
+`;
+
+
 
 const Button = styled.button`
   margin: 10px;
@@ -70,7 +73,8 @@ export default class AdminEvents extends React.Component {
       end: event?.end || new Date((new Date()).setHours((new Date()).getHours() + 2)),
       eventType: event?.eventType || "",
       event: "",
-      loading: false
+      loading: false,
+      editor: {}
     };
   }
 
@@ -80,6 +84,10 @@ export default class AdminEvents extends React.Component {
 
   handleDateChange(value, field) {
     this.setState({ [`${field}`]: value });
+  }
+
+  handleEditorChange(data) {
+    this.setState({ description: data })
   }
 
   async saveEvent() {
@@ -121,20 +129,13 @@ export default class AdminEvents extends React.Component {
           />
         </Label>
         <Label>
-          Short Description{" "}
-          <Input
-            type="text"
-            value={this.state.shortDescription}
-            onChange={(e) => this.handleChange(e, "shortDescription")}
-          />
-        </Label>
-        <Label>
           Text
-          <Textarea
-            type="text"
-            value={this.state.description}
-            onChange={(e) => this.handleChange(e, "description")}
-          />
+          <EditorContainer >
+            <Editor
+              defaultValue={this.state.description}
+              handleChange={(data) => this.handleEditorChange(data) }
+            />
+          </EditorContainer>
         </Label>
         <PickerContainer>
           <DatePicker

@@ -4,6 +4,8 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import styled from "styled-components";
 
+import Output from 'editorjs-react-renderer';
+
 const StyledBox = styled(Box)`
   word-wrap: break-word
 `;
@@ -61,7 +63,7 @@ export default function BasicModal(props) {
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <EventDescriptionContainer>
-              {props.event.description}
+              <Output data={ props.event.description } />
             </EventDescriptionContainer>
           </Typography>
         </StyledBox>

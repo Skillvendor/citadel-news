@@ -9,6 +9,7 @@ const isValid = (data) => {
 
   return true;
 }
+
 export const addCalendarEvent = async (data) => {
   if(!isValid(data)) {
     return
@@ -20,8 +21,8 @@ export const addCalendarEvent = async (data) => {
       shortDescription: data.shortDescription,
       description: data.description,
       eventType: data.eventType,
-      start: data.start,
-      end: data.end
+      start: data.start.toString(),
+      end: data.end.toString()
     });
     console.log("Event written with ID: ", docRef.id);
   } catch (e) {
@@ -47,8 +48,8 @@ export const updateCalendarEvent = async (data) => {
       shortDescription: data.shortDescription,
       description: data.description,
       eventType: data.eventType,
-      start: data.start,
-      end: data.end
+      start: data.start.toString(),
+      end: data.end.toString()
     });
     console.log("Event updated");
   } catch (e) {

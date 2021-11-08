@@ -41,8 +41,8 @@ export class Row extends React.Component {
           </TableCell>
           <TableCell align="right">{row.title}</TableCell>
           <TableCell align="right">{row.shortDescription}</TableCell>
-          <TableCell align="right">{row.start.toLocaleString()}</TableCell>
-          <TableCell align="right">{row.end.toLocaleString()}</TableCell>
+          <TableCell align="right">{row.start.toString()}</TableCell>
+          <TableCell align="right">{row.end.toString()}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>

@@ -4,6 +4,10 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import styled from "styled-components";
 
+const StyledBox = styled(Box)`
+  word-wrap: break-word
+`;
+
 const TitleContainer = styled.div`
   font-family: Orbitron;
   font-style: normal;
@@ -49,7 +53,7 @@ export default function BasicModal(props) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <StyledBox sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             <TitleContainer>
               {props.event.title}
@@ -60,7 +64,7 @@ export default function BasicModal(props) {
               {props.event.description}
             </EventDescriptionContainer>
           </Typography>
-        </Box>
+        </StyledBox>
       </Modal>
     </div>
   );

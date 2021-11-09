@@ -47,6 +47,8 @@ export default function BasicModal(props) {
     p: 4,
   };
 
+
+  const parsedDescription = props.event?.description ? JSON.parse(props.event.description) : {}
   return (
     <div>
       <Modal
@@ -63,7 +65,7 @@ export default function BasicModal(props) {
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <EventDescriptionContainer>
-              <Output data={ props.event.description } />
+              <Output data={ parsedDescription } />
             </EventDescriptionContainer>
           </Typography>
         </StyledBox>

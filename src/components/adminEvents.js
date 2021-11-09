@@ -67,8 +67,8 @@ export default class AdminEvents extends React.Component {
     this.state = {
       id: event?.id || "",
       title: event?.title || "",
-      shortDescription: event?.shortDescription || "",
       description: event?.description || "",
+      parsedDescription: event?.description ? JSON.parse(event.description) : "",
       start: event?.start || new Date(),
       end: event?.end || new Date((new Date()).setHours((new Date()).getHours() + 2)),
       eventType: event?.eventType || "",
@@ -96,7 +96,7 @@ export default class AdminEvents extends React.Component {
     }
     this.setState({event: "Creating event...", loading: true});
     await addCalendarEvent({ ...this.state });
-    this.setState({event: "Event created!", loading: false, title: "", shortDescription: "", description: "", eventType: "", start: new Date(), end: new Date((new Date()).setHours((new Date()).getHours() + 2))});
+    this.setState({event: "Event created!", loading: false, title: "", description: "", eventType: "", start: new Date(), end: new Date((new Date()).setHours((new Date()).getHours() + 2))});
   }
 
   async updateEvent() {
@@ -132,7 +132,7 @@ export default class AdminEvents extends React.Component {
           Text
           <EditorContainer >
             <Editor
-              defaultValue={this.state.description}
+              defaultValue={this.state.parsedDescription}
               handleChange={(data) => this.handleEditorChange(data) }
             />
           </EditorContainer>

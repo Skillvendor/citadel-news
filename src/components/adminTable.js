@@ -40,7 +40,6 @@ export class Row extends React.Component {
             </IconButton>
           </TableCell>
           <TableCell align="right">{row.title}</TableCell>
-          <TableCell align="right">{row.shortDescription}</TableCell>
           <TableCell align="right">{row.start.toString()}</TableCell>
           <TableCell align="right">{row.end.toString()}</TableCell>
         </TableRow>
@@ -80,7 +79,6 @@ export default class AdminTable extends React.Component {
             <TableRow>
               <TableCell />
               <TableCell>Title</TableCell>
-              <TableCell align="right">Short Description</TableCell>
               <TableCell align="right">Start Date</TableCell>
               <TableCell align="right">End Date</TableCell>
             </TableRow>

@@ -13,6 +13,13 @@ const Container = styled.div`
   color: white;
 `;
 
+const Title = styled.div`
+  margin 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+`;
+
 const Label = styled.label`
   display: block;
   margin: 10px;
@@ -34,8 +41,6 @@ const EditorContainer = styled.div`
   background: #FFFFFF;
   color: #000000;
 `;
-
-
 
 const Button = styled.button`
   margin: 10px;
@@ -120,6 +125,7 @@ export default class AdminEvents extends React.Component {
   render() {
     return (
       <Container>
+        <Title> Create Calendar Event </Title>
         <Label>
           Title{" "}
           <Input

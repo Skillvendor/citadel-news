@@ -4,6 +4,7 @@ import AdminLogin from '../components/adminLogin';
 import AdminAuth from '../lib/firebase/adminAuth';
 import AdminEvents from '../components/adminEvents';
 import AdminTable from '../components/adminTable';
+import AdminVideo from '../components/adminVideo';
 
 export default class NTCalendarAdmin extends React.Component {
   constructor(props) {
@@ -27,6 +28,7 @@ export default class NTCalendarAdmin extends React.Component {
       // true ? (
         <React.Fragment>
           <AdminEvents />
+          <AdminVideo />
           <AdminTable />
         </React.Fragment>
       ) : (
